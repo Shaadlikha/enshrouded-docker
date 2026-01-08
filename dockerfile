@@ -1,18 +1,28 @@
-FROM ubuntu:24.04
+FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     STEAMCMDDIR=/opt/steamcmd \
     EN_DIR=/home/steam/enshrouded \
     WINEPREFIX=/home/steam/.wine \
-    WINEDEBUG=-all
+    WINEDEBUG=-all \
+    LANG=en_US.UTF-8 \
+    LC_ALL=en_US.UTF-8
 
-# 32-bit arch for wine + steamcmd
-RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y \
-    ca-certificates curl wget unzip tini gosu \
-    wine64 wine32 \
-    xvfb \
-    lib32gcc-s1 lib32stdc++6 \
+# Core deps + Wine + headless X + locale (Jammy supports i386 multiarch cleanly)
+RUN dpkg --add-architecture i386 && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+      ca-certificates curl wget unzip tini gosu \
+      xvfb \
+      wine64 wine32 \
+      winbind \
+      lib32gcc-s1 lib32stdc++6 \
+      locales \
+    && locale-gen en_US.UTF-8 \
     && rm -rf /var/lib/apt/lists/*
+
+# Hard fail early if wine isn't present (prevents "built but broken" images)
+RUN command -v wine64 && wine64 --version
 
 # Install SteamCMD
 RUN mkdir -p ${STEAMCMDDIR} && \
@@ -21,7 +31,8 @@ RUN mkdir -p ${STEAMCMDDIR} && \
 
 # Create unprivileged user
 RUN useradd -m -u 10000 -s /bin/bash steam && \
-    mkdir -p ${EN_DIR} && chown -R steam:steam /home/steam ${STEAMCMDDIR}
+    mkdir -p ${EN_DIR} && \
+    chown -R steam:steam /home/steam ${STEAMCMDDIR}
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
