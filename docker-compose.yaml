@@ -1,17 +1,25 @@
 services:
   enshrouded:
-    build: .
+    image: ghcr.io/mrguato/enshrouded-docker:latest
     container_name: enshrouded
     restart: unless-stopped
+
     ports:
       - "15637:15637/udp"
       - "27015:27015/udp"
+
     environment:
-      - UPDATE_ON_START=1
-      - SERVER_NAME=JD's Enshrouded
-      - SERVER_SLOTS=16
-      # - SERVER_PASSWORD=ChangeMe
-      - PORT=15637
-      - STEAM_PORT=27015
+      UPDATE_ON_START: "1"
+      SERVER_NAME: "Ex Enshrouded Server Name"
+      SERVER_SLOTS: "16"
+      SERVER_PASSWORD: "SuperStrongPW!"
+      PORT: "15637"
+      STEAM_PORT: "27015"
+
+      # Optional but useful
+      FORCE_CONFIG_REWRITE: "1"   # set to 1 if you want env vars to overwrite JSON
+      RESET_WINEPREFIX: "0"       # set to 1 once if Wine gets cursed again
+
     volumes:
       - ./data:/home/steam/enshrouded
+      - ./wine:/home/steam/.wine
