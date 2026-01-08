@@ -4,25 +4,25 @@ ENV DEBIAN_FRONTEND=noninteractive \
     STEAMCMDDIR=/opt/steamcmd \
     EN_DIR=/home/steam/enshrouded \
     WINEPREFIX=/home/steam/.wine \
-    WINEDEBUG=-all \
-    LANG=en_US.UTF-8 \
-    LC_ALL=en_US.UTF-8
+    WINEDEBUG=-all
 
-# Core deps + Wine + headless X + locale (Jammy supports i386 multiarch cleanly)
-RUN dpkg --add-architecture i386 && \
-    apt-get update && \
+# Install deps + Wine (Jammy supports i386 multiarch)
+RUN set -eux; \
+    dpkg --add-architecture i386; \
+    apt-get update; \
     apt-get install -y --no-install-recommends \
-      ca-certificates curl wget unzip tini gosu \
+      ca-certificates curl wget unzip \
+      tini gosu \
       xvfb \
-      wine64 wine32 \
       winbind \
-      lib32gcc-s1 lib32stdc++6 \
-      locales \
-    && locale-gen en_US.UTF-8 \
-    && rm -rf /var/lib/apt/lists/*
-
-# Hard fail early if wine isn't present (prevents "built but broken" images)
-RUN command -v wine && wine --version
+      wine \
+      wine32 \
+      lib32gcc-s1 \
+      lib32stdc++6 \
+    ; \
+    command -v wine; \
+    wine --version; \
+    rm -rf /var/lib/apt/lists/*
 
 # Install SteamCMD
 RUN mkdir -p ${STEAMCMDDIR} && \
