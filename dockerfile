@@ -8,6 +8,10 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 # Base deps + WineHQ repo + modern Wine
 RUN dpkg --add-architecture i386 && \
+    apt-get update && \
+    apt-get install -y wine64 wine32 xvfb cabextract
+
+RUN dpkg --add-architecture i386 && \
     apt-get update && apt-get install -y --no-install-recommends \
       ca-certificates curl wget unzip tini gosu gnupg2 software-properties-common \
       xvfb winbind cabextract \
@@ -17,6 +21,7 @@ RUN dpkg --add-architecture i386 && \
     && apt-get update \
     && apt-get install -y --install-recommends winehq-stable \
     && rm -rf /var/lib/apt/lists/*
+
 
 # Install SteamCMD
 RUN mkdir -p ${STEAMCMDDIR} && \
